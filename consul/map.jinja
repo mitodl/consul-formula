@@ -1,0 +1,14 @@
+{% set consul = salt['grains.filter_by']({
+    'default': {
+        'pkg': 'consul',
+        'service': 'consul',
+        'conf_file': '/etc/consul/consul.conf',
+        'config': {
+            'key': 'value',
+        },
+    },
+    'Debian': {
+    },
+    'RedHat': {
+    },
+}, grain='os_family', merge=salt['pillar.get']('consul:lookup'), base='default') %}

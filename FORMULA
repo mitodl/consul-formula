@@ -1,0 +1,9 @@
+name: consul
+os: Debian
+os_family: Debian
+version: 201605
+release: 1
+summary: Formula to launch and manage Consul agents.
+description: Formula to launch and manage Consul agents.
+top_level_dir: consul
+recommended: 
