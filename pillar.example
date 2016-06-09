@@ -1,2 +1,9 @@
 consul:
   overrides:
+  extra_configs:
+    test_service:
+      service:
+        name: web
+        tags:
+          - django
+        port: 80

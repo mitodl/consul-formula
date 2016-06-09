@@ -1,5 +1,10 @@
 {% from "consul/map.jinja" import consul, consul_service with context %}
 
+# At the time of writing, Hashicorp doesn't maintain any official package
+# repositories for common linux distributions. The recommended installation
+# method is to download a zip, verify it, and extract consul into the system
+# path.
+
 download_package:
   file.managed:
     - name: /tmp/consul.zip
@@ -26,14 +31,14 @@ permission_consul_bin:
     - name: /usr/bin/consul
     - mode: 0755
 
-consul_config_directory:
-  file.directory:
-    - name: /etc/consul.d
-    - makedirs: True
-
 consul_data_directory:
   file.directory:
     - name: {{ consul.data_dir }}
+    - makedirs: True
+
+consul_config_directory:
+  file.directory:
+    - name: {{ consul.config_dir }}
     - makedirs: True
 
 configure_consul_service:
