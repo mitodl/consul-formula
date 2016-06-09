@@ -13,3 +13,14 @@
     'RedHat': {
     },
 }, grain='os_family', merge=salt['pillar.get']('consul:lookup'), base='default') %}
+
+{% set consul_service = salt.grains.filter_by({
+    'systemd': {
+        'destination_path': '/etc/systemd/system/consul.service',
+        'source_path': 'consul.service',
+    },
+    'upstart': {
+        'destination_path': '/etc/init/consul.conf',
+        'source_path': 'consul.upstart',
+    }
+}, grain='init', merge=salt.pillar.get('consul:init_service')) %}
