@@ -1,6 +1,7 @@
 {% set consul = salt['grains.filter_by']({
     'default': {
-        'pkg': 'consul',
+        'consul_zip': 'https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip',
+        'consul_zip_checksum': 'https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_SHA256SUMS',
         'service': 'consul',
         'conf_file': '/etc/consul/consul.conf',
         'config': {
