@@ -4,15 +4,13 @@
         'consul_zip_checksum': 'https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_SHA256SUMS',
         'service': 'consul',
         'conf_file': '/etc/consul/consul.conf',
-        'config': {
-            'key': 'value',
-        },
+        'data_dir': '/var/lib/consul',
     },
     'Debian': {
     },
     'RedHat': {
     },
-}, grain='os_family', merge=salt['pillar.get']('consul:lookup'), base='default') %}
+}, grain='os_family', merge=salt['pillar.get']('consul:overrides'), base='default') %}
 
 {% set consul_service = salt.grains.filter_by({
     'systemd': {

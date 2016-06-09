@@ -21,12 +21,23 @@ install_consul_bin:
     - require:
       - module: unzip_package
 
+permission_consul_bin:
+  file.managed:
+    - name: /usr/bin/consul
+    - mode: 0755
+
 consul_config_directory:
   file.directory:
     - name: /etc/consul.d
     - makedirs: True
 
+consul_data_directory:
+  file.directory:
+    - name: {{ consul.data_dir }}
+    - makedirs: True
+
 configure_consul_service:
   file.managed:
     - name: {{ consul_service.destination_path }}
-    - source: salt://consul/files/{{ consul_service.source_path }}
+    - source: salt://consul/templates/{{ consul_service.source_path }}
+    - template: jinja

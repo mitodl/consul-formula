@@ -1,6 +1,2 @@
 consul:
-  lookup:
-    pkg: myconsul
-    conf_file: /usr/local/etc/consul/consul.conf
-  config:
-    key: othervalue
+  overrides:
