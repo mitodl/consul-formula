@@ -11,3 +11,8 @@ test_{{ dir }}_dir_exists:
     - name: {{ dir }}
     - is_directory: True
 {% endfor %}
+
+test_consul_service_script:
+  testinfra.file:
+    - name: {{ consul_service.destination_path }}
+    - exists: True
