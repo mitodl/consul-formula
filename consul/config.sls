@@ -1,7 +1,7 @@
 {% from "consul/map.jinja" import consul with context %}
 
 include:
-  - .install
+  - .service
 
 {% for name, contents in salt.pillar.get('consul:extra_configs', {}).items() %}
 write_{{ name }}_config:
@@ -9,6 +9,7 @@ write_{{ name }}_config:
     - name: {{ consul.config_dir }}/{{ name }}.json
     - contents: |
         {{ contents|json }}
+    - makedirs: True
     - require:
       - file: consul_config_directory
     - require_in:

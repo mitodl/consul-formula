@@ -1,5 +1,5 @@
-consul_service_running:
-  service.running:
+test_consul_service_running:
+  testinfra.service:
     - name: consul
-    - running: True
-    - enable: True
+    - is_running: True
+    - is_enabled: True
