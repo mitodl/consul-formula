@@ -7,3 +7,5 @@ consul:
         tags:
           - django
         port: 80
+    encrypt:
+      encrypt: cg8StVXbQJ0gPvMd9o7yrg==

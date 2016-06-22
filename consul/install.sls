@@ -22,7 +22,7 @@ permission_consul_bin:
     - name: /usr/bin/consul
     - mode: 0755
     - require:
-      - archive: download_package
+      - archive: install_consul_binary
 
 consul_data_directory:
   file.directory:
