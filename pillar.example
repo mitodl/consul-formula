@@ -1,6 +1,11 @@
 consul:
-  lookup:
-    pkg: myconsul
-    conf_file: /usr/local/etc/consul/consul.conf
-  config:
-    key: othervalue
+  overrides:
+  extra_configs:
+    test_service:
+      service:
+        name: web
+        tags:
+          - django
+        port: 80
+    encrypt:
+      encrypt: cg8StVXbQJ0gPvMd9o7yrg==

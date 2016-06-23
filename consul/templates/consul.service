@@ -1,0 +1,16 @@
+{% from "consul/map.jinja" import consul, consul_service with context %}
+[Unit]
+Description=consul agent
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/consul
+Environment=GOMAXPROCS=2
+Restart=on-failure
+ExecStart=/usr/bin/consul agent $OPTIONS -config-dir={{ consul.config_dir }} -data-dir={{ consul.data_dir }}
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
