@@ -6,8 +6,8 @@
 # path.
 
 include:
-  - .service
   - .config
+  - .service
 
 install_consul_binary:
   archive.extracted:
@@ -22,21 +22,23 @@ permission_consul_bin:
     - name: /usr/bin/consul
     - mode: 0755
     - require:
-      - archive: install_consul_binary
+        - archive: install_consul_binary
+    - require_in:
+        - service: start_consul_service
 
 consul_data_directory:
   file.directory:
     - name: {{ consul.data_dir }}
     - makedirs: True
     - require_in:
-      - service: configure_consul_service
+      - file: configure_consul_service
 
 consul_config_directory:
   file.directory:
     - name: {{ consul.config_dir }}
     - makedirs: True
     - require_in:
-      - service: configure_consul_service
+      - file: configure_consul_service
 
 configure_consul_service:
   file.managed:
@@ -45,5 +47,9 @@ configure_consul_service:
     - template: jinja
     - require_in:
       - service: start_consul_service
-    - watch_in:
+  cmd.wait:
+    - name: systemctl daemon-reload
+    - watch:
+        - file: configure_consul_service
+    - require_in:
       - service: start_consul_service

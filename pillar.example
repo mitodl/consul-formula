@@ -1,5 +1,4 @@
 consul:
-  overrides:
   extra_configs:
     test_service:
       service:
@@ -7,5 +6,8 @@ consul:
         tags:
           - django
         port: 80
-    encrypt:
+    default:
+      bootstrap_expect: 1
+      server: True
       encrypt: cg8StVXbQJ0gPvMd9o7yrg==
+      enable_syslog: True
