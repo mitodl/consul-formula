@@ -4,6 +4,10 @@ test_consul_installed:
   testinfra.file:
     - name: /usr/bin/consul
     - exists: True
+    - is_file: True
+    - mode:
+        expected: 493
+        comparison: eq
 
 {% for dir in [consul.data_dir, consul.config_dir] %}
 test_{{ dir }}_dir_exists:
@@ -16,3 +20,9 @@ test_consul_service_script:
   testinfra.file:
     - name: {{ consul_service.destination_path }}
     - exists: True
+
+test_consul_service_enabled:
+  testinfra.service:
+    - name: consul
+    - is_enabled: True
+    - is_running: True

@@ -1,4 +1,5 @@
 base:
   '*':
     - consul
+    - consul.dns_proxy
     - consul.tests

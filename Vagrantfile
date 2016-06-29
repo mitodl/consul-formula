@@ -12,7 +12,17 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "debian/jessie64"
+  config.vm.define "debian" do |debian|
+    debian.vm.box = "debian/jessie64"
+  end
+
+  config.vm.define "centos" do |centos|
+    centos.vm.box = "centos/7"
+  end
+
+  config.vm.define "ubuntu" do |ubuntu|
+    ubuntu.vm.box = "ubuntu/trusty64"
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -69,15 +79,7 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision "shell", path: "scripts/vagrant_setup.sh"
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get install -y git python python-pip
-    sudo pip install -U pip six gitpython git+https://github.com/mitodl/testinfra@python_ruby_package#egg=testinfra
-  SHELL
-
-  config.vm.provision "shell", inline: "sudo apt-get install -y python-dev git python-pip"
-  config.vm.provision "shell", inline: "sudo pip install testinfra gitpython"
-
+  config.vm.provision "shell", path: "scripts/gitfs_deps.sh"
   config.vm.provision :salt do |salt|
     salt.minion_config = 'minion.conf'
     salt.bootstrap_options = '-U -Z'

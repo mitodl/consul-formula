@@ -12,8 +12,6 @@ write_{{ name }}_config:
     - makedirs: True
     - require:
       - file: consul_config_directory
-    - require_in:
-      - start_consul_service
     - watch_in:
-      - start_consul_service
+      - service: start_consul_service
 {% endfor %}
