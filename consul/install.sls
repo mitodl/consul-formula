@@ -47,9 +47,11 @@ configure_consul_service:
     - template: jinja
     - require_in:
       - service: start_consul_service
+  {% if salt.grains.get('init') == 'systemd' %}
   cmd.wait:
     - name: systemctl daemon-reload
     - watch:
         - file: configure_consul_service
     - require_in:
       - service: start_consul_service
+  {% endif %}
