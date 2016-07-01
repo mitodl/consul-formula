@@ -16,10 +16,16 @@ configure_dnsmasq:
     - name: /etc/dnsmasq.d/10-consul
     - contents: 'server=/consul/127.0.0.1#{{ consul.dns_port }}'
 
+unset_immutable_bit_on_resolv_conf:
+  cmd.run:
+    - name: chattr -i /etc/resolv.conf
+
 configure_resolv_conf:
   file.prepend:
     - name: /etc/resolv.conf
     - text: nameserver 127.0.0.1
+    - require:
+        - cmd: unset_immutable_bit_on_resolv_conf
   cmd.run:
     - name: chattr +i /etc/resolv.conf
     - require:
