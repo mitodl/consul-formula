@@ -10,8 +10,6 @@ write_{{ name }}_config:
     - contents: |
         {{ contents|json }}
     - makedirs: True
-    - require:
-      - file: consul_config_directory
     - watch_in:
       - service: start_consul_service
 {% endfor %}
