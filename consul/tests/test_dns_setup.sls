@@ -31,12 +31,12 @@ test_dnsmasq_listening:
     - name: tcp://127.0.0.1:53
     - is_listening: True
 
-test_consul_dns_listening:
+test_consul_dns_listening_tcp:
   testinfra.socket:
     - name: tcp://127.0.0.1:8600
     - is_listening: True
 
-test_consul_dns_listening:
+test_consul_dns_listening_udp:
   testinfra.socket:
     - name: udp://127.0.0.1:8600
     - is_listening: True
