@@ -9,7 +9,7 @@ install_pip_executable:
 
 install_testinfra_library_for_consul_testing:
   pip.installed:
-    - name: git+https://github.com/mitodl/testinfra
+    - name: testinfra
     - reload_modules: True
     - require:
         - cmd: install_pip_executable
