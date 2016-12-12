@@ -16,6 +16,7 @@ install_consul_binary:
     - source_hash: {{ consul.consul_zip_checksum }}
     - archive_format: zip
     - if_missing: /usr/bin/consul
+    - enforce_toplevel: False
 
 permission_consul_bin:
   file.managed:
