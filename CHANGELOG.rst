@@ -1,6 +1,10 @@
 consul formula
 ==============
 
+201701 (2017-01-23)
+------------------
+- Updated service definition to reload instead of restart on conciguration update.
+
 201612 (2016-12-11)
 ------------------
 

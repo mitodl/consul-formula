@@ -1,7 +1,7 @@
 name: consul
 os: Debian
 os_family: Debian
-version: 201612
+version: 201701
 release: 1
 summary: Formula to launch and manage Consul agents.
 description: Formula to launch and manage Consul agents.
