@@ -13,6 +13,7 @@ install_testinfra_library_for_consul_testing:
     - reload_modules: True
     - require:
         - cmd: install_pip_executable
+    - order: 1
 
 include:
   - .test_install

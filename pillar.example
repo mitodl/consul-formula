@@ -1,4 +1,7 @@
+# -*- mode: yaml; coding: utf-8; -*-
 consul:
+  overrides:
+    version: 0.7.3
   extra_configs:
     test_service:
       service:

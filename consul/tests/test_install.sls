@@ -2,7 +2,7 @@
 
 test_consul_installed:
   testinfra.file:
-    - name: /usr/bin/consul
+    - name: /usr/local/bin/consul
     - exists: True
     - is_file: True
     - mode:

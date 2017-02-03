@@ -1,6 +1,14 @@
 consul formula
 ==============
 
+201702 (2017-02-03)
+-------------------
+
+- Refactored to make version management easier
+- Moved install location from `/usr/bin/consul` to `/usr/local/bin/consul`
+- Added an `upgrade` state
+- Fixed ordering of install for Testinfra dependency so that tests work on first run
+
 201701 (2017-01-23)
 ------------------
 - Updated service definition to reload instead of restart on conciguration update.

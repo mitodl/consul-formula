@@ -1,7 +1,12 @@
-{% set consul = salt['grains.filter_by']({
+{% set consul = salt.grains.filter_by({
     'default': {
-        'consul_zip': 'https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip',
-        'consul_zip_checksum': 'https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_SHA256SUMS',
+        'architecture_dict': {
+            'x86_64': 'amd64',
+            'amd64': 'amd64',
+            'i386': '386',
+            'i686': '386'
+        },
+        'version': '0.7.3',
         'service': 'consul',
         'conf_file': '/etc/consul/consul.conf',
         'config_dir': '/etc/consul.d',
@@ -12,7 +17,7 @@
     },
     'RedHat': {
     },
-}, grain='os_family', merge=salt['pillar.get']('consul:overrides'), base='default') %}
+}, grain='os_family', merge=salt.pillar.get('consul:overrides'), base='default') %}
 
 {% set consul_service = salt.grains.filter_by({
     'systemd': {

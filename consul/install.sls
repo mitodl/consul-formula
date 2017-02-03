@@ -11,16 +11,15 @@ include:
 
 install_consul_binary:
   archive.extracted:
-    - name: /usr/bin/
-    - source: {{ consul.consul_zip }}
-    - source_hash: {{ consul.consul_zip_checksum }}
+    - name: /usr/local/bin/
+    - source: https://releases.hashicorp.com/consul/{{ consul.version }}/consul_{{ consul.version }}_linux_{{ consul.architecture_dict[grains['osarch']] }}.zip
+    - source_hash: https://releases.hashicorp.com/consul/{{ consul.version }}/consul_{{ consul.version }}_SHA256SUMS
     - archive_format: zip
-    - if_missing: /usr/bin/consul
+    - if_missing: /usr/local/bin/consul
     - enforce_toplevel: False
-
-permission_consul_bin:
+    - failhard: True
   file.managed:
-    - name: /usr/bin/consul
+    - name: /usr/local/bin/consul
     - mode: 0755
     - require:
         - archive: install_consul_binary
