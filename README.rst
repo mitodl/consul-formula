@@ -19,13 +19,22 @@ Available states
 ``consul``
 ----------
 
-TODO - add description of this state
+Install, configure, and start a Consul agent.
 
 ``consul.conf``
 ---------------
 
-TODO - add description of this state
+Write out configuration files from Pillar data and reload the Consul service.
 
+``consul.dns_proxy``
+--------------------
+
+Install and configure DNSMasq to serve as a local DNS proxy to Consul so that the DNS interface can be used locally without any modification to clients.
+
+``consul.upgrade``
+------------------
+
+Perform an in-place upgrade of Consul
 
 Template
 ========
