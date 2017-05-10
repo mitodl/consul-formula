@@ -1,3 +1,8 @@
+install_curl:
+  pkg.installed:
+    - pkgs: curl
+    - pkg_verify: True
+
 install_pip_executable:
   cmd.run:
     - name: |
