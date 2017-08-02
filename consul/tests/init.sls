@@ -1,7 +1,6 @@
-install_curl:
+install_curl_for_consul_testing:
   pkg.installed:
-    - pkgs: curl
-    - pkg_verify: True
+    - name: curl
 
 install_pip_executable:
   cmd.run:
