@@ -10,6 +10,8 @@ install_pip_executable:
         rm get_pip.py
     - reload_modules: True
     - unless: which pip
+    - require:
+        - pkg: install_curl_for_consul_testing
 
 install_testinfra_library_for_consul_testing:
   pip.installed:
