@@ -2,7 +2,7 @@ install_curl_for_consul_testing:
   pkg.installed:
     - name: curl
 
-install_pip_executable:
+install_pip_executable_for_consul_testing:
   cmd.run:
     - name: |
         curl -L "https://bootstrap.pypa.io/get-pip.py" > get_pip.py
