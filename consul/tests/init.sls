@@ -15,7 +15,7 @@ install_pip_executable_for_consul_testing:
 
 install_testinfra_library_for_consul_testing:
   pip.installed:
-    - name: testinfra
+    - name: "testinfra~=1.19"
     - reload_modules: True
     - require:
         - cmd: install_pip_executable_for_consul_testing
