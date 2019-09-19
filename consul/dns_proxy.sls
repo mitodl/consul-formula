@@ -16,22 +16,22 @@ configure_dnsmasq:
     - name: /etc/dnsmasq.d/10-consul
     - contents: 'server=/consul/127.0.0.1#{{ consul.dns_port }}'
 
-{% if not salt.cmd.run('which resolvconf') %}
-unset_immutable_bit_on_resolv_conf:
-  cmd.run:
-    - name: chattr -i /etc/resolv.conf
+install_resolvconf:
+  pkg.installed:
+    - name: resolvconf
 
-configure_resolv_conf:
+configure_resolvconf:
   file.prepend:
-    - name: /etc/resolv.conf
+    - name: /etc/resolvconf/resolv.conf.d/head
     - text: nameserver 127.0.0.1
     - require:
-        - cmd: unset_immutable_bit_on_resolv_conf
+        - pkg: install_resolvconf
+
+reload_resolvconf:
   cmd.run:
-    - name: chattr +i /etc/resolv.conf
+    - name: resolvconf -u
     - require:
-        - file: configure_resolv_conf
-{% endif %}
+        - file: configure_resolvconf
 
 dnsmasq_service_running:
   service.running:
