@@ -6,7 +6,7 @@
             'i386': '386',
             'i686': '386'
         },
-        'version': '1.0.3',
+        'version': '1.4.4',
         'service': 'consul',
         'conf_file': '/etc/consul/consul.conf',
         'config_dir': '/etc/consul.d',
@@ -19,9 +19,5 @@
     'systemd': {
         'destination_path': '/etc/systemd/system/consul.service',
         'source_path': 'consul.service',
-    },
-    'upstart': {
-        'destination_path': '/etc/init/consul.conf',
-        'source_path': 'consul.upstart',
     }
 }, grain='init', merge=salt.pillar.get('consul:init_service'), default='systemd') %}
