@@ -13,7 +13,7 @@
         'data_dir': '/var/lib/consul',
         'dns_port': 8600
     }
-}, grain='os_family', merge=salt.pillar.get('consul:overrides'), base='default') %}
+}, grain='os_family', merge=salt.pillar.get('consul:overrides'), default='default', base='default') %}
 
 {% set consul_service = salt.grains.filter_by({
     'systemd': {
@@ -24,4 +24,4 @@
         'destination_path': '/etc/init/consul.conf',
         'source_path': 'consul.upstart',
     }
-}, grain='init', merge=salt.pillar.get('consul:init_service'), default='systemd') %}
+}, grain='init', merge=salt.pillar.get('consul:init_service'), default='systemd', default='systemd') %}
