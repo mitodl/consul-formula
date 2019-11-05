@@ -11,6 +11,8 @@ Restart=on-failure
 ExecStart=/usr/local/bin/consul agent $OPTIONS -config-dir={{ consul.config_dir }} -data-dir={{ consul.data_dir }}
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM
+User={{ consul.user }}
+Group={{ consul.group }}
 
 [Install]
 WantedBy=multi-user.target

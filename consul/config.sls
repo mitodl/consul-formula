@@ -10,6 +10,8 @@ write_{{ name }}_config:
     - contents: |
         {{ contents|json(indent=2, sort_keys=True)|indent(8) }}
     - makedirs: True
+    - user: {{ consul.user }}
+    - group: {{ consul.group }}
     - watch_in:
       - service: start_consul_service
 {% endfor %}
