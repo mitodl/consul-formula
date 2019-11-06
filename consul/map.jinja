@@ -11,7 +11,9 @@
         'conf_file': '/etc/consul/consul.conf',
         'config_dir': '/etc/consul.d',
         'data_dir': '/var/lib/consul',
-        'dns_port': 8600
+        'dns_port': 8600,
+        'user': 'consul',
+        'group': 'consul'
     }
 }, grain='os_family', merge=salt.pillar.get('consul:overrides'), base='default') %}
 

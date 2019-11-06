@@ -9,6 +9,12 @@ include:
   - .config
   - .service
 
+create_consul_user:
+  user.present:
+    - name: {{ consul.user }}
+    - createhome: False
+    - shell: /bin/false
+
 install_consul_binary:
   archive.extracted:
     - name: /usr/local/bin/
@@ -29,14 +35,25 @@ install_consul_binary:
 consul_data_directory:
   file.directory:
     - name: {{ consul.data_dir }}
+    - user: {{ consul.user }}
+    - group: {{ consul.group }}
     - makedirs: True
+    - recurse:
+        - user
+        - group
     - require_in:
       - file: configure_consul_service
 
 consul_config_directory:
   file.directory:
     - name: {{ consul.config_dir }}
+    - name: {{ consul.data_dir }}
+    - user: {{ consul.user }}
+    - group: {{ consul.group }}
     - makedirs: True
+    - recurse:
+        - user
+        - group
     - require_in:
       - file: configure_consul_service
 
