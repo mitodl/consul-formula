@@ -41,6 +41,8 @@ consul_data_directory:
     - recurse:
         - user
         - group
+    - require:
+        - user: create_consul_user
     - require_in:
       - file: configure_consul_service
 
@@ -54,6 +56,8 @@ consul_config_directory:
     - recurse:
         - user
         - group
+    - require:
+        - user: create_consul_user
     - require_in:
       - file: configure_consul_service
 
