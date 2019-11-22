@@ -19,7 +19,8 @@ install_consul_binary:
   archive.extracted:
     - name: /usr/local/bin/
     - source: https://releases.hashicorp.com/consul/{{ consul.version }}/consul_{{ consul.version }}_linux_{{ consul.architecture_dict[grains['osarch']] }}.zip
-    - source_hash: 78d127e5b8edd310c3f9f89487fb833a5c7bcb4e09cb731a4d39100fc53b38be
+    - source_hash: https://releases.hashicorp.com/consul/{{ consul.version }}/consul_{{ consul.version }}_SHA256SUMS
+    - source_hash_name: {{ consul.version }}/consul_{{ consul.version }}_linux_{{ consul.architecture_dict[grains['osarch']] }}.zip
     - archive_format: zip
     - if_missing: /usr/local/bin/consul
     - enforce_toplevel: False
