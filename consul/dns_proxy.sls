@@ -14,7 +14,7 @@ install_dnsmasq:
 configure_dnsmasq:
   file.managed:
     - name: /etc/dnsmasq.d/10-consul
-    - contents: 'server=/consul/127.0.0.1#{{ consul.dns_port }}'
+    - contents: 'server=127.0.0.1#{{ consul.dns_port }}'
 
 {% if not salt.cmd.run('which resolvconf') %}
 unset_immutable_bit_on_resolv_conf:
@@ -22,9 +22,12 @@ unset_immutable_bit_on_resolv_conf:
     - name: chattr -i /etc/resolv.conf
 
 configure_resolv_conf:
-  file.prepend:
+  file.managed:
     - name: /etc/resolv.conf
-    - text: nameserver 127.0.0.1
+    - contents: |
+        nameserver 127.0.0.1
+        search ec2.local
+        domain ec2.local
     - require:
         - cmd: unset_immutable_bit_on_resolv_conf
   cmd.run:
