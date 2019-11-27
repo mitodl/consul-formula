@@ -14,7 +14,7 @@ install_dnsmasq:
 configure_dnsmasq:
   file.managed:
     - name: /etc/dnsmasq.d/10-consul
-    - contents: 'server=127.0.0.1#{{ consul.dns_port }}'
+    - contents: '/consul/server=127.0.0.1#{{ consul.dns_port }}'
 
 {% if not salt.cmd.run('which resolvconf') %}
 unset_immutable_bit_on_resolv_conf:
