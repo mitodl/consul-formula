@@ -22,12 +22,9 @@ unset_immutable_bit_on_resolv_conf:
     - name: chattr -i /etc/resolv.conf
 
 configure_resolv_conf:
-  file.managed:
+  file.prepend:
     - name: /etc/resolv.conf
-    - contents: |
-        nameserver 127.0.0.1
-        search ec2.local
-        domain ec2.local
+    - text: nameserver 127.0.0.1
     - require:
         - cmd: unset_immutable_bit_on_resolv_conf
   cmd.run:
