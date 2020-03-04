@@ -1,17 +1,16 @@
-{% from "consul/map.jinja" import consul with context %}
+#!pyobjects
+import json
 
-include:
-  - .service
+consul = salt.jinja.load_map('consul/map.jinja', 'consul')
+print(consul)
 
-{% for name, contents in salt.pillar.get('consul:extra_configs', {}).items() %}
-write_{{ name }}_config:
-  file.managed:
-    - name: {{ consul.config_dir }}/{{ name }}.json
-    - contents: |
-        {{ contents|json(indent=2, sort_keys=True)|safe|indent(8) }}
-    - makedirs: True
-    - user: {{ consul.user }}
-    - group: {{ consul.group }}
-    - watch_in:
-      - service: start_consul_service
-{% endfor %}
+include('.service')
+
+for name, contents in salt.pillar.get('consul:extra_configs', {}).items():
+    File.managed('write_{}_config'.format(name),
+                 name='{0}/{1}.json'.format(consul['config_dir'], name),
+                 contents=json.dumps(contents, indent=2, sort_keys=True),
+                 makedirs=True,
+                 user=consul['user'],
+                 group=consul['group'],
+                 watch_in=[Service('start_consul_service')])
