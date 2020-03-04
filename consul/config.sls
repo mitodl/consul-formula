@@ -8,7 +8,7 @@ write_{{ name }}_config:
   file.managed:
     - name: {{ consul.config_dir }}/{{ name }}.json
     - contents: |
-        {{ contents|tojson(indent=2)|indent(8) }}
+        {{ contents|json(indent=2, sort_keys=True)|safe|indent(8) }}
     - makedirs: True
     - user: {{ consul.user }}
     - group: {{ consul.group }}
