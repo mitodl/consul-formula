@@ -2,7 +2,6 @@
 import json
 
 consul = salt.jinja.load_map('consul/map.jinja', 'consul')
-print(consul)
 
 include('.service')
 
