@@ -27,6 +27,10 @@ configure_systemd_resolved_consul_domain:
         [Resolve]
         DNS=127.0.0.1
         Domains=~consul
+  service.running:
+    - name: systemd-resolved
+    - watch:
+        - file: configure_systemd_resolved_consul_domain
 {% elif not salt.cmd.run('which resolvconf') %}
 unset_immutable_bit_on_resolv_conf:
   cmd.run:
