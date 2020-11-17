@@ -13,3 +13,13 @@ for name, contents in salt.pillar.get('consul:extra_configs', {}).items():
                  user=consul['user'],
                  group=consul['group'],
                  watch_in=[Service('start_consul_service')])
+
+
+for name, contents in salt.pillar.get('consul:esm_configs', {}).items():
+    File.managed('write_esm_{}_config'.format(name),
+                 name='/etc/consul-esm.d/{1}.json'.format(name),
+                 contents=json.dumps(contents, indent=2, sort_keys=True),
+                 makedirs=True,
+                 user=consul['user'],
+                 group=consul['group'],
+                 watch_in=[Service('start_consul_service')])

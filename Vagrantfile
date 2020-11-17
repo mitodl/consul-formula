@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.define "debian" do |debian|
-    debian.vm.box = "debian/stretch64"
+    debian.vm.box = "debian/buster64"
   end
 
   config.vm.define "centos" do |centos|
@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "ubuntu" do |ubuntu|
-    ubuntu.vm.box = "ubuntu/xenial64"
+    ubuntu.vm.box = "ubuntu/focal64"
   end
 
   # Disable automatic box update checking. If you disable this, then
