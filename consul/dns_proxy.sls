@@ -14,9 +14,24 @@ install_dnsmasq:
 configure_dnsmasq:
   file.managed:
     - name: /etc/dnsmasq.d/10-consul
-    - contents: 'server=/consul/127.0.0.1#{{ consul.dns_port }}'
+    - contents: |
+        bind-interfaces
+        listen-address=127.0.0.1
+        server=/consul/127.0.0.1#{{ consul.dns_port }}
 
-{% if not salt.cmd.run('which resolvconf') %}
+{% if salt.service.enabled('systemd-resolved') %}
+configure_systemd_resolved_consul_domain:
+  file.managed:
+    - name: /etc/systemd/resolved.conf
+    - contents: |
+        [Resolve]
+        DNS=127.0.0.1
+        Domains=~consul
+  service.running:
+    - name: systemd-resolved
+    - watch:
+        - file: configure_systemd_resolved_consul_domain
+{% elif not salt.cmd.run('which resolvconf') %}
 unset_immutable_bit_on_resolv_conf:
   cmd.run:
     - name: chattr -i /etc/resolv.conf

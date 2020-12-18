@@ -1,4 +1,4 @@
-{% from "consul/map.jinja" import consul, consul_service with context %}
+{% from "consul/map.jinja" import consul with context %}
 
 test_consul_installed:
   testinfra.file:
@@ -18,7 +18,7 @@ test_{{ dir }}_dir_exists:
 
 test_consul_service_script:
   testinfra.file:
-    - name: {{ consul_service.destination_path }}
+    - name: /etc/systemd/system/consul.service
     - exists: True
 
 test_consul_service_enabled:
