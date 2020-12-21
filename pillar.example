@@ -1,7 +1,8 @@
 # -*- mode: yaml; coding: utf-8; -*-
 consul:
-  overrides:
-    version: 0.7.3
+  products:
+    consul: 1.8.4
+    consul-esm: 0.4.0
   extra_configs:
     test_service:
       service:
