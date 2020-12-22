@@ -17,7 +17,7 @@ for name, contents in salt.pillar.get('consul:extra_configs', {}).items():
 
 for name, contents in salt.pillar.get('consul:esm_configs', {}).items():
     File.managed('write_esm_{}_config'.format(name),
-                 name='/etc/consul-esm.d/{1}.json'.format(name),
+                 name='/etc/consul-esm.d/{0}.json'.format(name),
                  contents=json.dumps(contents, indent=2, sort_keys=True),
                  makedirs=True,
                  user=consul['user'],
